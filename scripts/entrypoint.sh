@@ -21,12 +21,13 @@ sysctl net.ipv6.conf.lo.disable_ipv6=0
 (/opt/opscode-reporting/embedded/bin/runsvdir-start &) && opscode-reporting-ctl reconfigure --accept-license
 
 ## Create initial admin user if it is not existing
-if [[ $(chef-server-ctl user-list) =~ 'admin' ]]; then
-    echo "admin user is existing."
+#if [[ $(chef-server-ctl user-list) =~ 'admin' ]]; then
+if [[ $(chef-server-ctl user-list) =~ "$USER_NAME" ]]; then
+    echo "$USER_NAME user is existing."
 else
     # Create a default admin user
-    chef-server-ctl user-create admin admin admin admin@example.com 'admin123' --filename /etc/opscode/admin.pem
-
+    # chef-server-ctl user-create admin admin admin admin@example.com 'admin123' --filename /etc/opscode/admin.pem
+    chef-server-ctl user-create $USER_NAME $FIRST_NAME $LAST_NAME $EMAIL "$PASSWORD" --filename /etc/opscode/admin.pem
     # Reconfigure Chef Server
     chef-server-ctl reconfigure
 fi

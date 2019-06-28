@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  chef-server:
+    privileged: true
+    build:
+      context: .
+      args:
+        #remember that docker image in Dockerfile is ubuntu 14.04
+        #https://downloads.chef.io/chef-server/#ubuntu
+        CHEF_SERVER_VERSION: 12.19.31
+        CHEF_SERVER_DOWNLOAD_SHA256: fdf02e0ddcb0d4675871c52357e368aaeb6ea0be3565675eeb00691928ccd84d
+        #https://downloads.chef.io/manage/2.5.16#ubuntu
+        CHEF_MANAGE_VERSION: 2.5.16
+        CHEF_MANAGE_DOWNLOAD_SHA256: 573e67a71ae718ab197cf1c8973a2a3566feefaf7246f062534a40a157850137
+        #https://downloads.chef.io/reporting/#ubuntu
+        CHEF_REPORTING_VERSION: 1.8.0
+        CHEF_REPORTING_DOWNLOAD_SHA256: e7aa43fda58ce019af4e71798574594a06144d7a57704d5e8069e98add0bbaf1
+    environment:
+      USER_NAME: administrator
+      FIRST_NAME: NameAdmin
+      LAST_NAME: LNameAdmin
+      EMAIL: administrator@example.com
+      PASSWORD: ZXhhbXBsZQo=
+    volumes:
+      - ./data/chef_home_directory:/etc/opscode:rw
+      - ./data/your_data_directory:/var/opt/opscode:rw
+      - ./data/your_backup_directory:/var/opt/chef-backup:rw
+    ports:
+      - "443:443"
