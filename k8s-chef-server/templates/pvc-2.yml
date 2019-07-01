@@ -1,0 +1,16 @@
+{{- if .Values.persistence.persistentVolume }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app.kubernetes.io/name: {{ include "k8s-chef-server.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+  name: chef-data-directory
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: "{{ .Values.persistence.persistentVolume.size }}"
+{{- end }}

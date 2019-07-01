@@ -1,5 +1,6 @@
 #!/bin/bash
-
+chmod +x /add-ssl-conf.rb
+/add-ssl-conf.rb
 set -x
 
 # For Postgres performance

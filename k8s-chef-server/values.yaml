@@ -1,0 +1,72 @@
+# Default values for k8s-chef-server.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: luisra51/chef-server
+  tag: latest
+  pullPolicy: Always
+
+env:
+  #all the section Enviroment Variables
+- name: USER_NAME
+  value: administ
+- name: FIRST_NAME
+  value: Name
+- name: LAST_NAME
+  value: LastName
+- name: EMAIL
+  value: administ@example.com
+- name: PASSWORD
+  value: ZXhhbX=
+- name: SSL_CRT
+  value: /opt/custom-certs/crt/crt.crt
+- name: SSL_KEY
+  value: /opt/custom-certs/key/key.key
+#
+
+customSSL:
+  enabled: true
+  path: /opt/custom-certs
+
+persistence:
+  # NFS or PersistentVolumeClaim
+  nfs:
+    enabled: false
+    server: 192.168.0.8
+    path: "/mnt/nfs_data/"
+    subPath: "data-chef-server"
+    readOnly: false
+  #Create 3 volumens of the same size
+  persistentVolume:
+    enabled: true
+    size: 10Gi
+
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: LoadBalancer
+  port: 443
+  containerPort: 443
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

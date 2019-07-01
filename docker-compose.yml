@@ -21,9 +21,13 @@ services:
       LAST_NAME: LNameAdmin
       EMAIL: administrator@example.com
       PASSWORD: ZXhhbXBsZQo=
+      SSL_CRT: /opt/custom-certs/crt.crt
+      SSL_KEY: /opt/custom-certs/key.key
     volumes:
       - ./data/chef_home_directory:/etc/opscode:rw
       - ./data/your_data_directory:/var/opt/opscode:rw
       - ./data/your_backup_directory:/var/opt/chef-backup:rw
+      - ./k8s-chef-server/custom-ssl/crt.crt:/opt/custom-certs/crt.crt
+      - ./k8s-chef-server/custom-ssl/key.key:/opt/custom-certs/key.key
     ports:
       - "443:443"
