@@ -68,11 +68,11 @@ docker-compose up -d
 ```
 
 ### Run on Kubernetes Cluster with Helm
-The charts k8s-chef-server is already configured by defalut with volumes type PersistentVolumeClaim but also support NFS volume.
+The charts k8s-chef-server is already configured by default with volumes type PersistentVolumeClaim but also support NFS volume.
 
 Run:
 ```bash
-helm install --name <name-release> --namespace <namespace> k8s-chef-server/ 
+helm install --name <name-release> --namespace <namespace> k8s-chef-server/
 ```
 
 ## Get admin user and default group key.
