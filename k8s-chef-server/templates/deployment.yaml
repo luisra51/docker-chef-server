@@ -31,7 +31,7 @@ spec:
               protocol: TCP
           resources:
 {{ toYaml .Values.resources | indent 12 }}
-        {{- if .Values.persistence.nfs }}
+        {{- if .Values.persistence.nfs.enabled }}
           volumeMounts:
           - name: data
             mountPath: /etc/opscode
@@ -49,7 +49,7 @@ spec:
             mountPath: "{{ .Values.customSSL.path }}/key"
             {{- end -}}
         {{- end -}}
-        {{- if .Values.persistence.persistentVolume }}
+        {{- if .Values.persistence.persistentVolume.enabled }}
           volumeMounts:
           - name: chef-home-directory
             mountPath: /etc/opscode
@@ -67,7 +67,7 @@ spec:
             mountPath: "{{ .Values.customSSL.path }}/key"
             {{- end -}}
         {{- end -}}
-        {{- if .Values.persistence.nfs }}
+        {{- if .Values.persistence.nfs.enabled }}
       volumes:
         - name: data
           nfs:
@@ -82,7 +82,7 @@ spec:
             secretName: "{{ include "k8s-chef-server.fullname" . }}-key"
         {{- end }}
         {{- end -}}
-        {{- if .Values.persistence.persistentVolume }}
+        {{- if .Values.persistence.persistentVolume.enabled }}
       volumes:
         - name: chef-home-directory
           persistentVolumeClaim:
