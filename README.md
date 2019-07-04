@@ -9,7 +9,7 @@ This Dockerfile installs and configure the Chef Server, Chef Manage, Chef Report
 ### Pull the image from Docker hub
 
 ```
-docker pull sunggun/chef-server
+docker pull luisra51/chef-server
 ```
 
 ### Run the Container
@@ -19,7 +19,7 @@ Run:
 docker run -d --privileged \
   --name chef-server \
   -p 443:443 \
-  sunggun/chef-server \
+  luisra51/chef-server \
   -e USER_NAME=administrator \
   -e FIRST_NAME=NameAdmin \
   -e LAST_NAME=LNameAdmin \
@@ -52,7 +52,7 @@ docker run -d --privileged \
   -v <your-backup-directory>:/var/opt/chef-backup:rw \
   -h <your-hostname> \
   -p 443:443 \
-  sunggun/chef-server \
+  luisra51/chef-server \
   -e USER_NAME=administrator \
   -e FIRST_NAME=NameAdmin \
   -e LAST_NAME=LNameAdmin \
@@ -107,7 +107,7 @@ docker build -t chef-server:latest -t chef-server:12.15.8 .
 
 For my workflow :-)
 ```bash
-docker build -t sunggun/chef-server:latest -t sunggun/chef-server:12.19.31 .
+docker build -t luisra51/chef-server:latest -t luisra51/chef-server:12.19.31 .
 ```
 
 To build the `chef-server` image with specific version such as `12.19.31`, you need to pass `CHEF_SERVER_VERSION` and `CHEF_SERVER_DOWNLOAD_SHA1` build-arg.
@@ -126,7 +126,7 @@ For my workflow:
 docker build \
   --build-arg CHEF_SERVER_VERSION=12.19.31 \
   --build-arg CHEF_SERVER_DOWNLOAD_SHA256=fdf02e0ddcb0d4675871c52357e368aaeb6ea0be3565675eeb00691928ccd84d \
-  -t sunggun/chef-server:12.19.31 \
+  -t luisra51/chef-server:12.19.31 \
   .
 ```
 
